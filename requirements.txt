@@ -1,0 +1,5 @@
+pytest
+aws-cdk-lib
+cfn-lint
+constructs
+syrupy
