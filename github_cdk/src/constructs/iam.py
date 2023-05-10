@@ -1,7 +1,7 @@
 from aws_cdk import aws_iam
 from aws_cdk import Environment
 from aws_cdk import Stack
-from constructs import Constructs
+from constructs import Construct
 
 _MY_SAML_LOGIN_ROLE_NAME = "my-reporting-role"
 _MY_POLICY_NAME = "my-reporting-role-read-only"
@@ -64,7 +64,7 @@ class LoginRolesStack(Stack):
             assumed_by=saml_principal,
             managed_policies=[actuarial_policy],
         )
-    def _get_policy_statement(self) -> aws_iam_PolicyStatement:
+    def _get_policy_statement(self) -> aws_iam.PolicyStatement:
         policy_statement = aws_iam.PolicyStatement()
 
         policy_statement.effect = aws.iam.Effect.ALLOW

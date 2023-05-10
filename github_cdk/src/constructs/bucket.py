@@ -4,17 +4,17 @@ from aws_cdk import RemovalPolicy
 from aws_cdk import Duration
 from constructs import Construct
 
-from src.constructs.kms import KMSConstructs
+from kms import *
 
 _DEFAULT_LIFECYCLE_RULE = aws_s3.LifecycleRule(
     id="default-lifecycle-rule",
-    noncurrent_versions_expiration=Duration.days(60),
-    transition=[
-        aws_s3.Transition(
-        storage_class=aws_s3.StorageClass("INTELLIGENT_TIERING"),
-        transition_after=Duration.days(0),
-        )
-    ],
+    noncurrent_version_expiration=Duration.days(60),
+    # transition=[
+    #     aws_s3.Transition(
+    #     storage_class=aws_s3.StorageClass("INTELLIGENT_TIERING"),
+    #     transition_after=Duration.days(0),
+    #     )
+    # ],
 )
 
 class S3Constructs:
