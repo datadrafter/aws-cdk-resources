@@ -3,11 +3,12 @@ from aws_cdk import (
     aws_ec2 as ec2,
     aws_elasticloadbalancingv2 as elbv2,
     aws_elasticloadbalancing as elb,
-    core,
 )
+from constructs import Construct
+import aws_cdk as core
 
 class CdkSimpleUbuntuInstanceAsg(core.Stack):
-    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, id: str, account: str, region: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         #############################################
