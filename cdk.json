@@ -5,6 +5,6 @@
             "@aws-cdk/core:newStyleStackSynthesis": true,
             "account" : "389275668707",
             "region": "us-east-1"
-        }
+        } 
     }
 }
