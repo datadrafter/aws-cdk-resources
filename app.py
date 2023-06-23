@@ -7,6 +7,7 @@ from github_cdk.src.constructs.kms import KMSConstructs
 from github_cdk.src.constructs.ssm import *
 from typing import Any
 from typing import Optional
+from constructs import Construct
 
 
 def _get_env_config(scope: Construct, key: str) -> Any:
@@ -26,24 +27,29 @@ def _get_env_config(scope: Construct, key: str) -> Any:
 def create_app():
     app = App()
     account = _get_env_config(app, "account")
-    xacount = _get_env_config(app, "xacc_account")
     region = _get_env_config(app, "region")
-    dr_region = _get_env_config(app, "dr_region")
+    env_name = app.node.try_get_context("env") or "dev"
 
     repository_name = "aws-cdk-resources"
     stack_name = f"{repository_name}-stack"
     
-    ec2_stack = CdkSimpleUbuntuInstanceAsg(
+    # ec2_stack = CdkSimpleUbuntuInstanceAsg(
+    #     scope = app,
+    #     env_name=env_name,
+    #     id = stack_name,
+    #     account = account,
+    #     region = region
+    #  )
+
+
+    login_roles = LoginRolesStack(
         scope = app,
-        id = stack_name,
-        account = account,
-        region = region
-     )
+        stack_id= stack_name,
+        env = env_name
+        )
+
 
     app.synth()
 
 if __name__ == "__main__":
     create_app()
-
-
-""" Call this iam constructs here"""

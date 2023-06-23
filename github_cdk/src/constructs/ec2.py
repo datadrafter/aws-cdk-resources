@@ -8,7 +8,7 @@ from constructs import Construct
 import aws_cdk as core
 
 class CdkSimpleUbuntuInstanceAsg(core.Stack):
-    def __init__(self, scope: Construct, id: str, account: str, region: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, id: str, account: str, region: str, env_name: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         #############################################
@@ -109,15 +109,15 @@ class NLBStack(core.Stack):
             "Allow ssh access from anywhere"
         )
 
-        asg = autoscaling.AutoScalingGroup(
-            self, "ASG",
-            vpc=vpc,
-            instance_type=ec2.InstanceType.of(
-                ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.MICRO
-            ),
-            machine_image=ec2.AmazonLinuxImage(),
-        )
-        asg.add_security_group(my_sg) # add our security group, expects object
+        # asg = autoscaling.AutoScalingGroup(
+        #     self, "ASG",
+        #     vpc=vpc,
+        #     instance_type=ec2.InstanceType.of(
+        #         ec2.InstanceClass.BURSTABLE2, ec2.InstanceSize.MICRO
+        #     ),
+        #     machine_image=ec2.AmazonLinuxImage(),
+        # )
+        # asg.add_security_group(my_sg) # add our security group, expects object
 
         ## Classic Elastic Load Balancer
         #lb = elb.LoadBalancer(
