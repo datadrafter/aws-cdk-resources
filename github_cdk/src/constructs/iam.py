@@ -119,6 +119,19 @@ class LoginRolesStack(Stack):
         return policy_statement
 
 
+    def create_lambda_role(scope: Construct, account: str) -> aws_iam.Role:
+        role_name = "my-lambda-execution-role",
+        lambda_role = aws_iam.Role(
+            scope=scope,
+            role_name=role_name,
+            id=role_name,
+            assumed_by=aws_iam.ServicePrincipa("lambda.amazonaws.com"),
+            managed_policies = [aws_iam.ManagedPolicy.from_aws_managed_policy_name(
+                "service-role/AWSLambdaBasicExecutionRole"
+            )]
+        )
+        return lambda_role
+
 
 
 
